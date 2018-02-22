@@ -44,12 +44,12 @@ function main(){
 		clear
 		#upgradeSystem
 		config	
-		#installgedit
+		installgedit
 	    installNodeJs
-	    #installPostgreSQL
-	    #installpgAdmin3
-	    #installWebStorm
-	    #installSublimeText
+	    installPostgreSQL
+	    installpgAdmin3
+	    installWebStorm
+	    installSublimeText
 }
 
 function config(){
