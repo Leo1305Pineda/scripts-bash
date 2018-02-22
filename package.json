@@ -1,0 +1,24 @@
+{
+  "name": "scripts-bash",
+  "version": "1.0.0",
+  "description": "Projecto de desarrollo de script en base a lenguaje de consola Bash Shell",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Leo1305Pineda/scripts-bash.git"
+  },
+  "keywords": [
+    "bash",
+    "sh",
+    "shell"
+  ],
+  "author": "Leonardo Pineda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Leo1305Pineda/scripts-bash/issues"
+  },
+  "homepage": "https://github.com/Leo1305Pineda/scripts-bash#readme"
+}
