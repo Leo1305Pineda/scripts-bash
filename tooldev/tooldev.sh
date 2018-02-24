@@ -238,7 +238,7 @@ function installWebStorm(){
 			echo -e $amarillo"Se Descargara: "$LIB$gris" Y se ubicara en: "$DIR_LIB$rescolor
 			
 			AUX_PWD=$PWD 
-			cd DIR_LIB &&  curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/dist/$LIB -o /bin/$LIB && cd AUX_PWD && descomprimirWebStorm
+			cd DIR_LIB &&  curl -sL https://github.com/Leo1305Pineda/scripts-bash/raw/master/dist/$LIB -o /bin/$LIB && cd AUX_PWD && descomprimirWebStorm
 			echo -e $verde"HECHO..."$rescolor	
 			sleep 1;
 		else

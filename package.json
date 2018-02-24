@@ -4,7 +4,8 @@
   "description": "Projecto de desarrollo de script en base a lenguaje de consola Bash Shell",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-tooldev": "bash build/build-tooldev.sh "
   },
   "repository": {
     "type": "git",
