@@ -9,7 +9,7 @@ if ! [ -d $TOOLDEV ]; then
 	cd /tmp && mkdir scripts-bash && cd scripts-bash
 
 	echo "El directorio no se encuentra se realizara la descarga"
-	curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/dist/$LIB -o $LIB
+	curl -sL https://github.com/Leo1305Pineda/scripts-bash/raw/master/dist/$LIB -o $LIB
 	sudo tar -xvf $LIB
 	cp -R tooldev $TOOLDEV
 
