@@ -11,6 +11,6 @@ ToolDev es un script para la instalacion de herramienta de desarrollo como
 
 instalar el script tooldev en tu computadora con:
 
-sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/dist/run-tooldev -o /bin/tooldev && sudo chmod a+x /bin/tooldev
+sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-tooldev -o /bin/abee && sudo chmod a+x /bin/abee
 
 ejecutar en la terminal para ver la ayuda  ~ $ tooldev --help
