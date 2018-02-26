@@ -49,6 +49,7 @@ while true; do
 		 	break;;
 			"install" ) 
 				installgedit
+				installGit
 	    		installNodeJs
 	    		installPostgreSQL
 	    		installpgAdmin3
@@ -56,6 +57,8 @@ while true; do
 		    	installSublimeText
 			break;;
 			"install gedit" ) installgedit
+			break;;
+			"install git" ) installGit
 			break;;
 			"install node" ) installNodeJs
 			break;;
@@ -80,7 +83,7 @@ function help(){
 	echo "ejecutar el script con argumento"
 	echo "[ --help ]"
 	echo "[ install ]"
-	echo "install [ gedit | node | postgresql | pgadmin3 | webstorm | sublime-text-3 ]"
+	echo "install [ gedit | git | node | postgresql | pgadmin3 | webstorm | sublime-text-3 ]"
 
 }
 
@@ -147,7 +150,7 @@ function installNodeJs(){
 	VERSION='v8.9.4'
 	if ! [ -d $HOME/.nvm ]; then
 	    	bash -ic "bash $PWD/lib/install_nvm.sh"
-		source $HOME/.profile
+		source $HOME/.bashrc
 		installNodeJs
 	else
 	    echo -e $verde"Instalando nueva Version node-"$VERSION"-linux-x64"$rescolor
@@ -211,6 +214,21 @@ function installpgAdmin3(){
 
 function installgedit(){
 	PKG='gedit'
+	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
+
+	if ! dpkg -l $PKG  &> /dev/null ;then
+		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
+		echo -e $verde"Instalando $PKG"$rescolor
+		sudo apt-get install $PKG -y 
+		echo -e $verde"HECHO..."$rescolor	
+	else
+		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
+	fi
+	sleep 0.1
+}
+
+function installGit(){
+	PKG='git'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 
 	if ! dpkg -l $PKG  &> /dev/null ;then
