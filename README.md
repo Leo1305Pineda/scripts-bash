@@ -26,5 +26,9 @@ Construir el script tooldev con
 Testear el script con 
 ~ $ npm run test-tooldev
 
+Deploy a Git con
+
+~ $ npm run deploy-tooldev
+
 
 

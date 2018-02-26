@@ -38,7 +38,7 @@ function help(){
 
 
 function pushGit(){
-	echo -e $amarillo" Ejecutando push remote $( git remote )"
+	echo -e $amarillo" Ejecutando push remote $( git remote )"$rescolor
 	RP="$(git remote)"
 	git push "$RP"
 	echo -e $verde"HECHO..."$rescolor
