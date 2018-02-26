@@ -154,6 +154,7 @@ function installNodeJs(){
 		installNodeJs
 	else
 	    echo -e $verde"Instalando nueva Version node-"$VERSION"-linux-x64"$rescolor
+	    sudo chmod a+x+w+r -R $HOME/.nvm
 	    bash -ic "nvm install $VERSION && nvm ls"
 	    echo -e $verde"HECHO..."$rescolor
 	fi
