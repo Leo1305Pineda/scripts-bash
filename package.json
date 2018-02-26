@@ -4,8 +4,10 @@
   "description": "Projecto de desarrollo de script en base a lenguaje de consola Bash Shell",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-tooldev": "bash build/build-tooldev.sh "
+    "test-tooldev": "npm run build-tooldev && abee install",
+    "build-tooldev": "bash build/build-tooldev.sh",
+    "reset-tooldev": "sudo rm /bin/run-tooldev && sudo rm -R /usr/share/tooldev",
+    "deploy": "npm run build-tooldev && bash gitmanager/git-manager.sh start"
   },
   "repository": {
     "type": "git",

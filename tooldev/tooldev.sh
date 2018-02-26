@@ -40,8 +40,8 @@ function exitmode(){
 }
 
 function main(){
-config
 clear
+config
 while true; do
 		case "$@" in
 			"update-system" )
@@ -55,6 +55,7 @@ while true; do
 	    		installpgAdmin3
 	    		installWebStorm
 		    	installSublimeText
+		    	installVisualStudioCode
 			break;;
 			"install gedit" ) installgedit
 			break;;
@@ -68,7 +69,9 @@ while true; do
 			break;;
 			"install webstorm" ) installWebStorm
 			break;;
-			"install sublime-text-3" ) installSublimeText
+			"install visual-studio-code" ) installVisualStudioCode
+			break;;
+			"install sublime-text-installer" ) installSublimeText
 			break;;
 			"--help" ) help
 			break;;
@@ -83,18 +86,11 @@ function help(){
 	echo "ejecutar el script con argumento"
 	echo "[ --help ]"
 	echo "[ install ]"
-	echo "install [ gedit | git | node | postgresql | pgadmin3 | webstorm | sublime-text-3 ]"
+	echo "install [ gedit | git | node | postgresql | pgadmin3 | webstorm | visual-studio-code | sublime-text-installer ]"
 
 }
 
 function config(){
-	if ! [ -d /tmp/toodev ] ; then
-		mkdir /tmp/toodev
-	fi
-
-	if ! [ -d /tmp/toodev/lib ] ; then
-		mkdir /tmp/toodev/lib
-	fi
 
 	if [ $DEBUT = 1 ] ; then
 		echo "Modo 1-Distribucion"
@@ -149,14 +145,18 @@ function installNodeJs(){
 	PKG='nodejs'
 	VERSION='v8.9.4'
 	if ! [ -d $HOME/.nvm ]; then
-	    	bash -ic "bash $PWD/lib/install_nvm.sh"
+	    bash -ic "bash $PWD/lib/install_nvm.sh"
 		source $HOME/.bashrc
 		installNodeJs
-	else
-	    echo -e $verde"Instalando nueva Version node-"$VERSION"-linux-x64"$rescolor
-	    sudo chmod a+x+w+r -R $HOME/.nvm
-	    bash -ic "nvm install $VERSION && nvm ls"
-	    echo -e $verde"HECHO..."$rescolor
+	else	
+		if ! [ -d $HOME'/.nvm/versions/node/'$VERSION ] ; then
+	    	echo -e $verde"Instalando nueva Version node-"$VERSION"-linux-x64"$rescolor
+	    	sudo chmod a+x+w+r -R $HOME/.nvm
+	    	bash -ic "nvm install $VERSION && nvm ls"
+	    	echo -e $verde"HECHO..."$rescolor
+	    else 
+	    	echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
+		fi
 	fi
 	sleep 0.1
 }
@@ -247,18 +247,23 @@ function installWebStorm(){
 	PKG='WebStorm'
 	RES='WebStorm-173.4548.30'
 	LIB='WebStorm-2017.3.4.tar.gz'
-	DIR_LIB=$PWD'/lib'
+	DIR_LIB='/usr/share/tooldev/lib'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 		
 	if ! [ -d /opt/$RES ]; then
 		if ! [ -f $DIR_LIB/$LIB ]; then
-			echo $DIR_LIB$LIB
 			echo -e $rojo$LIB" no encontrado en: "$verde""$DIR_LIB""$rescolor
 			echo -e $amarillo"Se Descargara: "$LIB$gris" Y se ubicara en: "$DIR_LIB$rescolor
 			
 			AUX_PWD=$PWD 
-			cd DIR_LIB &&  curl -sL https://download.jetbrains.com/webstorm/$LIB -o /bin/$LIB && cd AUX_PWD && descomprimirWebStorm
-			echo -e $verde"HECHO..."$rescolor	
+			cd $DIR_LIB
+			if [ curl -sL https://download.jetbrains.com/webstorm/$LIB -o /bin/$LIB  &> /dev/null] ; then
+				 descomprimirWebStorm	
+				echo -e $verde"HECHO..."$rescolor		
+			else
+				echo -e $rojo"Fallo de Descarga.........................."$rescolor		
+			fi 
+			cd $AUX_PWD
 			sleep 1;
 		else
 			descomprimirWebStorm
@@ -270,7 +275,7 @@ function installWebStorm(){
 }
 
 function descomprimirWebStorm(){
-	DIR_LIB=$PWD'/lib'
+	DIR_LIB='/usr/share/tooldev/lib'
 	LIB='WebStorm-2017.3.4.tar.gz'
 	PKG='WebStorm'
 	RES='WebStorm-173.4548.30'
@@ -290,6 +295,19 @@ Categories=Development;IDE;
 Terminal=false
 StartupWMClass=jetbrains-webstorm'>'/usr/share/applications/jetbrains-webstorm.desktop'
 "
+}
+
+function installVisualStudioCode(){
+	PKG='VisualStudioCode'
+	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
+	echo -e $amarillo"En Desarrollo"$rescolor
+	descomprimirVisualStudioCode
+	sleep 0.1
+}
+
+function descomprimirVisualStudioCode(){
+	echo -e $amarillo"......................"
+	sleep 0.1
 }
 
 main "$@"
