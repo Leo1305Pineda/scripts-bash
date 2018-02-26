@@ -38,8 +38,8 @@ function help(){
 
 
 function pushGit(){
-	echo -n " Ingresar remote [ origin | master ] #> "
-	read RP
+	echo -e $amarillo" Ejecutando push remote $( git remote )"
+	RP="$(git remote)"
 	git push "$RP"
 	echo -e $verde"HECHO..."$rescolor
 }
