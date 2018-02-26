@@ -226,8 +226,8 @@ function installgedit(){
 
 function installWebStorm(){
 	PKG='WebStorm'
-	RES='WebStorm-163.12024.17'
-	LIB='WebStorm-2016.3.3.tar.gz'
+	RES='WebStorm-173.4548.30'
+	LIB='WebStorm-2017.3.4.tar.gz'
 	DIR_LIB=$PWD'/lib'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 		
@@ -238,7 +238,7 @@ function installWebStorm(){
 			echo -e $amarillo"Se Descargara: "$LIB$gris" Y se ubicara en: "$DIR_LIB$rescolor
 			
 			AUX_PWD=$PWD 
-			cd DIR_LIB &&  curl -sL https://github.com/Leo1305Pineda/scripts-bash/raw/master/dist/$LIB -o /bin/$LIB && cd AUX_PWD && descomprimirWebStorm
+			cd DIR_LIB &&  curl -sL https://download.jetbrains.com/webstorm/$LIB -o /bin/$LIB && cd AUX_PWD && descomprimirWebStorm
 			echo -e $verde"HECHO..."$rescolor	
 			sleep 1;
 		else
@@ -252,9 +252,9 @@ function installWebStorm(){
 
 function descomprimirWebStorm(){
 	DIR_LIB=$PWD'/lib'
-	LIB='WebStorm-2016.3.3.tar.gz'
+	LIB='WebStorm-2017.3.4.tar.gz'
 	PKG='WebStorm'
-	RES='WebStorm-163.12024.17'
+	RES='WebStorm-173.4548.30'
 	sudo cp $DIR_LIB/$LIB /opt
 	AUX=$PWD 	
 	cd /opt && sudo tar -xvf $LIB && cd $AUX
@@ -264,8 +264,8 @@ function descomprimirWebStorm(){
 Version=1.0
 Type=Application
 Name=WebStorm
-Icon=/opt/WebStorm-163.12024.17/bin/webstorm.svg
-Exec="/opt/WebStorm-163.12024.17/bin/webstorm.sh" %f
+Icon=/opt/WebStorm-173.4548.30/bin/webstorm.svg
+Exec="/opt/WebStorm-173.4548.30/bin/webstorm.sh" %f
 Comment=The Drive to Develop
 Categories=Development;IDE;
 Terminal=false
