@@ -247,17 +247,17 @@ function installWebStorm(){
 	PKG='WebStorm'
 	RES='WebStorm-173.4548.30'
 	LIB='WebStorm-2017.3.4.tar.gz'
-	DIR_LIB='/usr/share/tooldev/lib'
+	DIR_LIB='/opt'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 		
-	if ! [ -d /opt/$RES ]; then
+	if ! [ -d $DIR_LIB/$RES ]; then
 		if ! [ -f $DIR_LIB/$LIB ]; then
 			echo -e $rojo$LIB" no encontrado en: "$verde""$DIR_LIB""$rescolor
 			echo -e $amarillo"Se Descargara: "$LIB$gris" Y se ubicara en: "$DIR_LIB$rescolor
 			
 			AUX_PWD=$PWD 
 			cd $DIR_LIB
-			if [ curl -sL https://download.jetbrains.com/webstorm/$LIB -o /bin/$LIB  &> /dev/null] ; then
+			if [ $( curl -sL https://download.jetbrains.com/webstorm/$LIB -o $LIB )  &> /dev/null] ; then
 				 descomprimirWebStorm	
 				echo -e $verde"HECHO..."$rescolor		
 			else
@@ -275,7 +275,7 @@ function installWebStorm(){
 }
 
 function descomprimirWebStorm(){
-	DIR_LIB='/usr/share/tooldev/lib'
+	DIR_LIB='/opt'
 	LIB='WebStorm-2017.3.4.tar.gz'
 	PKG='WebStorm'
 	RES='WebStorm-173.4548.30'
@@ -305,14 +305,14 @@ function installVisualStudioCode(){
 	RES='VSCode-linux-x64'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 		
-	if ! [ -d $DIR:LIB/$RES ]; then
-		if ! [ -f $DIR_LIB ]; then
+	if ! [ -d $DIR_LIB/$RES ]; then
+		if ! [ -f $DIR_LIB/$LIB ]; then
 			echo -e $rojo$LIB" no encontrado en: "$verde""$DIR_LIB""$rescolor
 			echo -e $amarillo"Se Descargara: "$LIB$gris" Y se ubicara en: "$DIR_LIB$rescolor
 			
 			AUX_PWD=$PWD 
 			cd $DIR_LIB
-			if [ curl -sL $URL$LIB -o $DIR_LIB  &> /dev/null] ; then
+			if [ $( curl -sL $URL$LIB -o $LIB ) &> /dev/null ] ; then
 				 descomprimirVisualStudioCode
 				echo -e $verde"HECHO..."$rescolor		
 			else
@@ -332,7 +332,6 @@ function installVisualStudioCode(){
 function descomprimirVisualStudioCode(){
 	DIR_LIB='/opt'
 	PKG='VisualStudioCode'
-	URL='https://az764295.vo.msecnd.net/stable/f88bbf9137d24d36d968ea6b2911786bfe103002/'
 	LIB='code-stable-code_1.20.1-1518535978_amd64.tar.gz'
 	RES='VSCode-linux-x64'
 	BIN='/bin/visual-studio-code.sh'
