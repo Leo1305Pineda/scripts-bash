@@ -298,16 +298,58 @@ StartupWMClass=jetbrains-webstorm'>'/usr/share/applications/jetbrains-webstorm.d
 }
 
 function installVisualStudioCode(){
+	DIR_LIB='/opt'
 	PKG='VisualStudioCode'
+	URL='https://az764295.vo.msecnd.net/stable/f88bbf9137d24d36d968ea6b2911786bfe103002/'
+	LIB='code-stable-code_1.20.1-1518535978_amd64.tar.gz'
+	RES='VSCode-linux-x64'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
-	echo -e $amarillo"En Desarrollo"$rescolor
-	descomprimirVisualStudioCode
+		
+	if ! [ -d $DIR:LIB/$RES ]; then
+		if ! [ -f $DIR_LIB ]; then
+			echo -e $rojo$LIB" no encontrado en: "$verde""$DIR_LIB""$rescolor
+			echo -e $amarillo"Se Descargara: "$LIB$gris" Y se ubicara en: "$DIR_LIB$rescolor
+			
+			AUX_PWD=$PWD 
+			cd $DIR_LIB
+			if [ curl -sL $URL$LIB -o $DIR_LIB  &> /dev/null] ; then
+				 descomprimirVisualStudioCode
+				echo -e $verde"HECHO..."$rescolor		
+			else
+				echo -e $rojo"Fallo de Descarga.........................."$rescolor		
+			fi 
+			cd $AUX_PWD
+			sleep 1;
+		else
+			descomprimirVisualStudioCode
+		fi
+	else
+		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
+	fi
 	sleep 0.1
 }
 
 function descomprimirVisualStudioCode(){
-	echo -e $amarillo"......................"
-	sleep 0.1
+	DIR_LIB='/opt'
+	PKG='VisualStudioCode'
+	URL='https://az764295.vo.msecnd.net/stable/f88bbf9137d24d36d968ea6b2911786bfe103002/'
+	LIB='code-stable-code_1.20.1-1518535978_amd64.tar.gz'
+	RES='VSCode-linux-x64'
+	BIN='/bin/visual-studio-code.sh'
+	AUX=$PWD 	
+	cd $DIR_LIB && sudo tar -xvf $LIB && cd $AUX
+	sudo chmod +x $DIR_LIB/$RES$BIN
+	sudo bash -ic " echo '[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WebStorm
+Icon=/opt/WebStorm-173.4548.30/bin/webstorm.svg
+Exec="/opt/VSCode-linux-x64/bin/visual-studio-code.sh" %f
+Comment=The Drive to Develop
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-webstorm'>'/usr/share/applications/visual-studio-code.desktop'
+"
 }
 
 main "$@"
