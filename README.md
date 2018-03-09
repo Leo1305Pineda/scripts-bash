@@ -15,6 +15,10 @@ instalar el script tooldev en tu computadora con:
 
 ~ $ sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-tooldev -o /bin/abee && sudo chmod a+x /bin/abee && abee --help
 
+install el script sascha en tu computadora con:
+
+~ $ sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-sascha -o /bin/sascha && sudo chmod a+x /bin/sascha 
+
 Para Contribuir en el desarrollo de script-bash con
 
 ~ $ git clone http://github.com/Leo1305Pineda/scripts-bash.git
@@ -22,9 +26,11 @@ Para Contribuir en el desarrollo de script-bash con
 
 Construir el script tooldev con
 ~ $ npm run build-tooldev
+~ $ npm run build-sascha
 
 Testear el script con 
 ~ $ npm run test-tooldev
+~ $ npm run test-sascha
 
 Deploy a Git con
 
