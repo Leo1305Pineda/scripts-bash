@@ -50,12 +50,12 @@ while true; do
 			"install" ) 
 				installgedit
 				installGit
-	    		installNodeJs
 	    		installPostgreSQL
 	    		installpgAdmin3
-	    		installWebStorm
+	    	#	installWebStorm
 		    	installSublimeText
-		    	installVisualStudioCode
+		    #	installVisualStudioCode
+		    	installNodeJs
 			break;;
 			"install gedit" ) installgedit
 			break;;
@@ -146,14 +146,15 @@ function installNodeJs(){
 	VERSION='v8.9.4'
 	if ! [ -d $HOME/.nvm ]; then
 	    bash -ic "bash $PWD/lib/install_nvm.sh"
-		source $HOME/.bashrc
 		installNodeJs
 	else	
 		if ! [ -d $HOME'/.nvm/versions/node/'$VERSION ] ; then
 	    	echo -e $verde"Instalando nueva Version node-"$VERSION"-linux-x64"$rescolor
+	    	source $HOME/.bashrc
 	    	sudo chmod a+x+w+r -R $HOME/.nvm
 	    	bash -ic "nvm install $VERSION && nvm ls"
 	    	echo -e $verde"HECHO..."$rescolor
+	    	echo -e $amarillo"cerrar y abrir la terminal"$rescolor
 	    else 
 	    	echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
 		fi
@@ -178,8 +179,6 @@ if ! dpkg -l $PKG  &> /dev/null ;then
 		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
 	fi
 	sleep 0.1
-
-	echo ""	
 }
 
 function installPostgreSQL(){
@@ -308,11 +307,11 @@ function installVisualStudioCode(){
 	if ! [ -d $DIR_LIB/$RES ]; then
 		if ! [ -f $DIR_LIB/$LIB ]; then
 			echo -e $rojo$LIB" no encontrado en: "$verde""$DIR_LIB""$rescolor
-			echo -e $amarillo"Se Descargara: "$LIB$gris" Y se ubicara en: "$DIR_LIB$rescolor
+			echo -e $amarillo"Se esta descargando: "$LIB$gris" ubicando recurso en: "$DIR_LIB$rescolor
 			
 			AUX_PWD=$PWD 
 			cd $DIR_LIB
-			if [ $( curl -sL $URL$LIB -o $LIB ) &> /dev/null ] ; then
+			if ! [ echo $( curl -sL $URL$LIB -o $LIB ) &> /dev/null ] ; then
 				 descomprimirVisualStudioCode
 				echo -e $verde"HECHO..."$rescolor		
 			else
@@ -334,21 +333,13 @@ function descomprimirVisualStudioCode(){
 	PKG='VisualStudioCode'
 	LIB='code-stable-code_1.20.1-1518535978_amd64.tar.gz'
 	RES='VSCode-linux-x64'
-	BIN='/bin/visual-studio-code.sh'
+	BIN='/bin/code'
 	AUX=$PWD 	
+	echo -e $amarillo"Descomprimiendo recurso...."$rescolor
 	cd $DIR_LIB && sudo tar -xvf $LIB && cd $AUX
+	echo -e $verde"HECHO..."$rescolor
 	sudo chmod +x $DIR_LIB/$RES$BIN
-	sudo bash -ic " echo '[Desktop Entry]
-Version=1.0
-Type=Application
-Name=WebStorm
-Icon=/opt/WebStorm-173.4548.30/bin/webstorm.svg
-Exec="/opt/VSCode-linux-x64/bin/visual-studio-code.sh" %f
-Comment=The Drive to Develop
-Categories=Development;IDE;
-Terminal=false
-StartupWMClass=jetbrains-webstorm'>'/usr/share/applications/visual-studio-code.desktop'
-"
+	bash -ic "bash $DIR_LIB/$RES$BIN"
 }
 
 main "$@"
