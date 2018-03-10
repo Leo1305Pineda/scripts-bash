@@ -17,7 +17,7 @@ instalar el script tooldev en tu computadora con:
 
 install el script sascha en tu computadora con:
 
-~ $ sudo curl -sL https://raw.githubusercontent.com/SaschaNutric/scripts-bash/master/dist/run-sascha -o /bin/sascha && sudo chmod a+x /bin/sascha 
+~ $ sudo curl -sL https://raw.githubusercontent.com/SaschaNutric/scripts-bash/master/dist/run-sascha -o /bin/sascha && sudo chmod a+x /bin/sascha && sudo sascha
 
 Para Contribuir en el desarrollo desde la rama master script-bash con:
 
