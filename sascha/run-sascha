@@ -11,6 +11,8 @@ if ! [ -d $SASCHA ]; then
 	curl -sL https://github.com/Leo1305Pineda/scripts-bash/raw/master/dist/$LIB -o $LIB
 	tar -xvf $LIB
 	cp -R sascha $SASCHA
+	echo "Lista para usar el script sascha"
+	echo "~ $ sascha"
 
 else
 	cd $SASCHA && bash $SASCHA/sascha.sh "$@" 
