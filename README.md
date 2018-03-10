@@ -13,13 +13,13 @@ ToolDev es un script para la instalacion de herramienta de desarrollo como
 
 instalar el script tooldev en tu computadora con:
 
-~ $ sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-tooldev -o /bin/abee && sudo chmod a+x /bin/abee && abee --help
+~ $ sudo curl -sL https://raw.githubusercontent.com/SaschaNutric/scripts-bash/master/dist/run-tooldev -o /bin/abee && sudo chmod a+x /bin/abee && abee --help
 
 install el script sascha en tu computadora con:
 
-~ $ sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-sascha -o /bin/sascha && sudo chmod a+x /bin/sascha 
+~ $ sudo curl -sL https://raw.githubusercontent.com/SaschaNutric/scripts-bash/master/dist/run-sascha -o /bin/sascha && sudo chmod a+x /bin/sascha 
 
-Para Contribuir en el desarrollo de script-bash con
+Para Contribuir en el desarrollo desde la rama master script-bash con
 
 ~ $ git clone http://github.com/Leo1305Pineda/scripts-bash.git
 ~ $ cd scripts-bash
