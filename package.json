@@ -11,6 +11,7 @@
     "test-sascha": "npm run build-sascha && run-sascha init",
     "build-sascha": "bash build/build-sascha.sh",
     "reset-sascha": "sudo rm /bin/sascha && sudo rm -R /usr/share/sascha",
+    "resetest-sascha": "sudo rm /bin/run-sascha && sudo rm -R /usr/share/sascha",
     "deploy-sascha": "npm run build-sascha && bash gitmanager/git-manager.sh start"
   },
   "repository": {

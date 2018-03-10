@@ -17,17 +17,16 @@ USER_NAME=''
 
 function main(){
 clear
-config
 while true; do
 		case "$@" in
 			"update-system" )
 		 		upgradeSystem
 		 	break;;
-			"init" ) initSascha
+			"init" ) config && initSascha
 			break;;
-			"pull" ) pullSascha
+			"pull" ) config && pullSascha
 			break;;
-			"push" ) pushSascha
+			"push" ) config && pushSascha
 			break;;
 			"--help" ) help
 			break;;
@@ -45,8 +44,10 @@ function config(){
 
 function help(){
 	echo -e $amarillo"ejecutar el script" $azul" sascha "$amarillo"con argumento"$rescolor
-	echo "[ --help ]"
-	echo "[ init ]"
+	echo "[ --help ] Ayuda de sascha"
+	echo "[ init ] Inicio clona los proyecto sascha"
+	echo "[ pull ] Actualiza con los cambio desde la rama padre"
+	echo "[ sascha push ] Actualiza tu repositorio github"
 }
 
 function initSascha(){
@@ -274,6 +275,7 @@ function addMenu(){
 				echo -e $verde"HECHO..."$rescolor
 				break ;;
 			5 ) commitMenu
+				break ;;
 			* ) clear;
 		  esac
 	done
@@ -323,6 +325,7 @@ while true; do
 				echo -e $verde"HECHO..."$rescolor
 				break ;;
 			5 ) pushMenu
+				break ;;
 			* ) clear;
 		  esac
 	done

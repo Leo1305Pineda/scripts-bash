@@ -15,62 +15,20 @@ AUX_PWD=$PWD
 LIB='sascha-v0.0.1.tar.gz'
 
 if ! [ -d $SASCHA ]; then
-	cd /tmp && mkdir scripts-bash && cd scripts-bash
+cd /tmp && mkdir scripts-bash && cd scripts-bash
 
-	echo -e $verde"El directorio no se encuentra se realizara la descarga"$rescolor
-	curl -sL https://github.com/Leo1305Pineda/scripts-bash/raw/master/dist/$LIB -o $LIB
-	tar -xvf $LIB
-	cp -R sascha $SASCHA
-	echo -e $verde"Lista para usar el script "$magenta"sascha"$rescolor
-	echo -e $azul"~"$verde" $ "$magenta"sascha"$rescolor
-
+echo -e $verde"El directorio no se encuentra se realizara la descarga"$rescolor
+curl -sL https://github.com/Leo1305Pineda/scripts-bash/raw/master/dist/$LIB -o $LIB
+tar -xvf $LIB
+cp -R sascha $SASCHA
+echo -e $verde"Lista para usar el script "$magenta"sascha"$rescolor
+echo -e $azul"~"$verde" $ "$magenta"sascha"$rescolor
 else
 	cd $SASCHA && bash $SASCHA/sascha.sh "$@" 
 fi
-
 cd $AUX_PWD
 if [ -d /tmp/scripts-bash ] ; then 
 	rm -r -f /tmp/scripts-bash
 fi
 
 
-function checkearDependencia(){
-	installGit
-	installSublimeText
-}
-
-function installGit(){
-	PKG='git'
-	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
-
-	if ! dpkg -l $PKG  &> /dev/null ;then
-		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
-		echo -e $verde"Instalando $PKG"$rescolor
-		sudo apt-get install $PKG -y 
-		echo -e $verde"HECHO..."$rescolor	
-	else
-		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
-	fi
-	sleep 0.1
-}
-
-function installSublimeText(){
-PKG='sublime-text-installer'
-echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
-
-if ! dpkg -l $PKG  &> /dev/null ;then
-		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
-		echo -e $verde"Instalando $PKG"$rescolor
-		sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y && updateSystem
-		sudo apt-get install $PKG -y 
-		echo -e $amarillo"<-- AVISO -->"$rescolor
-		echo -e $azul"INGRESAR KEY LICENSE"$rescolor
-		echo -e $gris$KEY_LICENSE_SUBLIMETEXT$rescolor
-		echo -e $verde"HECHO..."$rescolor	
-	else
-		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
-	fi
-	sleep 0.1
-}
-
-checkearDependencia
