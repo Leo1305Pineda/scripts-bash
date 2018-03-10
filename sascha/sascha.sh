@@ -57,8 +57,8 @@ function initSascha(){
 			read USER_NAME
 			cloneApiSascha
 			cloneAppSaschaWeb
-			cloneApiSaschaWebDesktop
-			cloneApiSaschaMovil
+			cloneAppSaschaWebDesktop
+			cloneAppSaschaMovil
 		fi
 	fi
 }
@@ -68,7 +68,8 @@ function cloneApiSascha(){
 	AUX_PWD=$PWD
 	cd $DIR_SASCHA
 	if ! [ -d $DIR_SASCHA$REPO ]; then
-		if ! [ echo $( git clone $URL_GIT_BASE$USER_NAME$REPO'.git' ) &> /dev/null ] ; then
+		git clone $URL_GIT_BASE$USER_NAME$REPO'.git'
+		if [ -d api-sascha ] ; then
 			echo -e $verde"HECHO..."
 		else
 			echo -e $rojo"Falla al clonar el repositorio no Existente "$rescolor
@@ -90,7 +91,8 @@ function cloneAppSaschaWeb(){
 	AUX_PWD=$PWD
 	cd $DIR_SASCHA
 	if ! [ -d $DIR_SASCHA$REPO ]; then
-		if ! [ echo $( git clone $URL_GIT_BASE$USER_NAME$REPO'.git' ) &> /dev/null ] ; then
+		git clone $URL_GIT_BASE$USER_NAME$REPO'.git' 
+		if [ -d app-sascha-web ] ; then
 			echo -e $verde"HECHO..."
 		else
 			echo -e $rojo"Falla al clonar el repositorio no Existente "$rescolor
@@ -107,12 +109,13 @@ function cloneAppSaschaWeb(){
 	cd $AUX_PWD
 }
 
-function cloneApiSaschaWebDesktop(){
+function cloneAppSaschaWebDesktop(){
 	REPO='/app-sascha-web-desktop'
 	AUX_PWD=$PWD
 	cd $DIR_SASCHA
 	if ! [ -d $DIR_SASCHA$REPO ]; then
-		if ! [ echo $( git clone $URL_GIT_BASE$USER_NAME$REPO'.git' ) &> /dev/null ] ; then
+		git clone $URL_GIT_BASE$USER_NAME$REPO'.git'
+		if [ -d app-sascha-web-desktop] ; then
 			echo -e $verde"HECHO..."
 		else
 			echo -e $rojo"Falla al clonar el repositorio no Existente "$rescolor
@@ -134,7 +137,8 @@ function cloneAppSaschaMovil(){
 	AUX_PWD=$PWD
 	cd $DIR_SASCHA
 	if ! [ -d $DIR_SASCHA$REPO ]; then
-		if ! [ echo $( git clone $URL_GIT_BASE$USER_NAME$REPO'.git' ) &> /dev/null ] ; then
+		git clone $URL_GIT_BASE$USER_NAME$REPO'.git'
+		if [ -d app-sascha-movil ] ; then
 			echo -e $verde"HECHO..."
 		else
 			echo -e $rojo"Falla al clonar el repositorio no Existente "$rescolor
@@ -150,6 +154,5 @@ function cloneAppSaschaMovil(){
 	fi	
 	cd $AUX_PWD
 }
-
 
 main "$@"
