@@ -10,6 +10,7 @@ amarillo="\033[1;33m"
 azul="\033[1;34m"
 rescolor="\e[0m"
 
+NAME_SCRIPT='sascha'
 DIR_SASCHA=$HOME'/git/sascha/'
 URL_GIT_BASE='https://github.com/'
 URL_GIT_MASTER='https://github.com/SaschaNutric/'
@@ -28,12 +29,30 @@ while true; do
 			break;;
 			"push" ) config && pushSascha
 			break;;
+			"update" ) update
+			break;;
 			"--help" ) help
 			break;;
 			* ) help 
 			 break;;
 		esac
 	done				
+}
+
+function update(){
+	echo -e $verde"Actualizando el Script "$NAME_SCRIPT$rescolor
+	if [ -f /bin/run-$NAME_SCRIPT ]; then
+		sudo rm /bin/run-$NAME_SCRIPT
+	fi
+	if [ -d /usr/share/$NAME_SCRIPT ]; then
+		sudo rm -R /usr/share/$NAME_SCRIPT
+	fi
+	sudo curl -sL https://raw.githubusercontent.com/SaschaNutric/scripts-bash/master/dist/run-sascha -o /bin/sascha 
+	sudo chmod a+x /bin/$NAME_SCRIPT 
+	sudo $NAME_SCRIPT --help
+	sleep 1
+	echo -e $verde"Actualizado el Script "$NAME_SCRIPT$rescolor
+	echo -e $verde"Ejecutar el script con: "$azul$NAME_SCRIPT$rescolor
 }
 
 function config(){
@@ -43,11 +62,14 @@ function config(){
 }
 
 function help(){
-	echo -e $amarillo"ejecutar el script" $azul" sascha "$amarillo"con argumento"$rescolor
-	echo "[ --help ] Ayuda de sascha"
-	echo "[ init ] Inicio clona los proyecto sascha"
-	echo "[ pull ] Actualiza con los cambio desde la rama padre"
-	echo "[ sascha push ] Actualiza tu repositorio github"
+	echo -e $amarillo"ejecutar el script" $azul" "$NAME_SCRIPT" "$amarillo"con argumento"$rescolor
+	echo -e $amarillo$NAME_SCRIPT$rescolor" [ opcion ]"
+	echo -e $magenta"   opcion:"$rescolor
+	echo "	|	--help		* Ayuda de "$NAME_SCRIPT
+	echo "	|	init  		* Inicio clona los proyecto sascha"
+	echo "	|	pull  		* Actualiza con los cambio desde la rama padre"
+	echo "	|	push  		* Actualiza tu repositorio github"
+	echo "	|	update 		* Actualiza tu script "$NAME_SCRIPT
 }
 
 function initSascha(){
@@ -83,7 +105,7 @@ function cloneApiSascha(){
 	if ! [ -d $DIR_SASCHA$REPO ]; then
 		git clone $URL_GIT_BASE$USER_NAME$REPO'.git'
 		if [ -d api-sascha ] ; then
-			echo -e $verde"HECHO..."
+			echo -e $verde"HECHO..."$rescolor
 		else
 			echo -e $rojo"Falla al clonar el repositorio no Existente "$rescolor
 			echo -e $magenta"Ir a:"$azul$URL_GIT_MASTER$verde" y "$rescolor"Fork "$magenta$REPO$rescolor
@@ -91,6 +113,9 @@ function cloneApiSascha(){
 	else
 		if [ -d $DIR_SASCHA$REPO'/.git' ]; then
 			echo -e $verde"Repositorio Existente"$rescolor
+			echo -e $amarillo"Instalando dependencias node..."$magenta
+			cd $DIR_SASCHA$REPO && npm install 
+			echo -e $verde"HECHO..."$rescolor
 		else
 			echo -e $verde"Ubicar el directorio: "$rojo"cd "$azul$DIR_SASCHA$REPO$rescolor
 			echo -e $verde"Iniciar Un nuevo repositorio con: "$rojo"git "$azul"init"$rescolor
@@ -114,6 +139,9 @@ function cloneAppSaschaWeb(){
 	else
 		if [ -d $DIR_SASCHA$REPO'/.git' ]; then
 			echo -e $verde"Repositorio Existente"$rescolor
+			echo -e $amarillo"Instalando dependencias node..."$magenta
+			cd $DIR_SASCHA$REPO && npm install 
+			echo -e $verde"HECHO..."$rescolor
 		else
 			echo -e $verde"Ubicar el directorio: "$rojo"cd "$azul$DIR_SASCHA$REPO$rescolor
 			echo -e $verde"Iniciar Un nuevo repositorio con: "$rojo"git "$azul"init"$rescolor
@@ -137,6 +165,9 @@ function cloneAppSaschaWebDesktop(){
 	else
 		if [ -d $DIR_SASCHA$REPO'/.git' ]; then
 			echo -e $verde"Repositorio Existente"$rescolor
+			echo -e $amarillo"Instalando dependencias node..."$magenta
+			cd $DIR_SASCHA$REPO && npm install 
+			echo -e $verde"HECHO..."$rescolor
 		else
 			echo -e $verde"Ubicar el directorio: "$rojo"cd "$azul$DIR_SASCHA$REPO$rescolor
 			echo -e $verde"Iniciar Un nuevo repositorio con: "$rojo"git "$azul"init"$rescolor
@@ -160,6 +191,9 @@ function cloneAppSaschaMovil(){
 	else
 		if [ -d $DIR_SASCHA$REPO'/.git' ]; then
 			echo -e $verde"Repositorio Existente"$rescolor
+			echo -e $amarillo"Instalando dependencias node..."$magenta
+			cd $DIR_SASCHA$REPO && npm install 
+			echo -e $verde"HECHO..."$rescolor
 		else
 			echo -e $verde"Ubicar el directorio: "$rojo"cd "$azul$DIR_SASCHA$REPO$rescolor
 			echo -e $verde"Iniciar Un nuevo repositorio con: "$rojo"git "$azul"init"$rescolor

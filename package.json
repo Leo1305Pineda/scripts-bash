@@ -28,5 +28,13 @@
   "bugs": {
     "url": "https://github.com/Leo1305Pineda/scripts-bash/issues"
   },
-  "homepage": "https://github.com/Leo1305Pineda/scripts-bash#readme"
+  "homepage": "https://github.com/Leo1305Pineda/scripts-bash#readme",
+  "dependencies": {
+    "install": "^0.10.4",
+    "javascript-to-typescript": "^1.0.2",
+    "npm": "^5.7.1"
+  },
+  "devDependencies": {
+    "typings": "^2.1.1"
+  }
 }

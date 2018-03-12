@@ -4,7 +4,6 @@ TOOLDEV='/usr/share/tooldev'
 AUX_PWD=$PWD
 LIB='tooldev-v0.0.1.tar.gz'
 
-
 if ! [ -d $TOOLDEV ]; then
 	cd /tmp && mkdir scripts-bash && cd scripts-bash
 

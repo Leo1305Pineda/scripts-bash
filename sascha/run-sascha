@@ -8,7 +8,7 @@ if ! [ -d $SASCHA ]; then
 cd /tmp && mkdir scripts-bash && cd scripts-bash
 
 echo "El directorio no se encuentra se realizara la descarga"
-curl -sL https://github.com/Leo1305Pineda/scripts-bash/raw/master/dist/$LIB -o $LIB
+curl -sL https://github.com/SaschaNutric/scripts-bash/raw/master/dist/$LIB -o $LIB
 tar -xvf $LIB
 cp -R sascha $SASCHA
 echo "Listo para usar el script sascha?"
