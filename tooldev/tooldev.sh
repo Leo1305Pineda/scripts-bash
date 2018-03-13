@@ -22,6 +22,7 @@ B8EB32F8 8D415F8E F16FE657 A35381CC
 ------ END LICENSE ------'
 
 DIR_LIB=$PWD/lib
+NAME_SCRIPT='tooldev'
 
 #Colores
 blanco="\033[1;37m"
@@ -50,6 +51,7 @@ while true; do
 			"install" ) 
 				installgedit
 				installGit
+				installHeroku
 	    		installPostgreSQL
 	    		installpgAdmin3
 	    	#	installWebStorm
@@ -60,6 +62,8 @@ while true; do
 			"install gedit" ) installgedit
 			break;;
 			"install git" ) installGit
+			break;;
+			"install heroku" ) installHeroku
 			break;;
 			"install node" ) installNodeJs
 			break;;
@@ -73,6 +77,8 @@ while true; do
 			break;;
 			"install sublime-text-installer" ) installSublimeText
 			break;;
+			"update" ) update
+			break;;
 			"--help" ) help
 			break;;
 			* ) help 
@@ -82,12 +88,40 @@ while true; do
 		
 }
 
-function help(){
-	echo "ejecutar el script con argumento"
-	echo "[ --help ]"
-	echo "[ install ]"
-	echo "install [ gedit | git | node | postgresql | pgadmin3 | webstorm | visual-studio-code | sublime-text-installer ]"
+function update(){
+	echo -e $verde"Actualizando el Script "$NAME_SCRIPT$rescolor
+	if [ -f /bin/run-$NAME_SCRIPT ]; then
+		sudo rm /bin/run-$NAME_SCRIPT
+	fi
+	if [ -d /usr/share/$NAME_SCRIPT ]; then
+		sudo rm -R /usr/share/$NAME_SCRIPT
+	fi
+	sudo curl -sL https://raw.githubusercontent.com/SaschaNutric/scripts-bash/master/dist/run-sascha -o /bin/sascha 
+	sudo chmod a+x /bin/$NAME_SCRIPT 
+	sudo $NAME_SCRIPT --help
+	sleep 1
+	echo -e $verde"Actualizado el Script "$NAME_SCRIPT$rescolor
+	echo -e $verde"Ejecutar el script con: "$azul$NAME_SCRIPT$rescolor
+}
 
+
+function help(){
+	echo "ejecutar el script "$NAME_SCRIPT" con argumento"
+	echo -e $amarillo$NAME_SCRIPT $rescolor" [ opcion ]"$rescolor
+	echo -e $magenta"   opcion:"$rescolor
+	echo -e "	|	--help 			* Ayuda de "$NAME_SCRIPT$rescolor
+	echo -e "	|	install 		* Instalacion de toda las herranientas"$rescolor
+	echo -e "	|	update 			* Actualiza el script"$NAME_SCRIPT$rescolor
+	echo -e $amarillo$NAME_SCRIPT" install "$rescolor"[ opcion ]"$rescolor
+	echo -e $magenta"   opcion:"$rescolor
+	echo -e "	|	gedit 			* Herranienta Gedit"$rescolor
+	echo -e "	|	heroku 			* Herranienta Heroku"$rescolor
+	echo -e "	|	node 			* Herranienta Node"$rescolor
+	echo -e "	|	pgadmin3 		* Herranienta Pgadmin3"$rescolor
+	echo -e "	|	postgresql 		* Herranienta PostgreSql"$rescolor
+	echo -e "	|	webstorm 		* Herranienta WebStorm"$rescolor
+	echo -e "	|	visual-studio-code 	* Herranienta VisualStudioCode"$rescolor
+	echo -e "	|	sublime-text-installer 	* Herranienta SublimeText"$rescolor
 }
 
 function config(){
@@ -97,11 +131,11 @@ function config(){
 	fi
 
 	if [ $DEBUT = 0 ] ; then
-		if [ -f $PWD/toodev ] ; then
-			echo -e $amarillo"Ubicate en el directorio del script:toodev"$rescolor
+		if [ -f $PWD/tooldev ] ; then
+			echo -e $amarillo"Ubicate en el directorio del script:tooldev"$rescolor
 			exit 1;
 		else
-			echo -e $amarillo"Iniciando script toodev"$rescolor
+			echo -e $amarillo"Iniciando script tooldev"$rescolor
 		fi
 	fi
 }
@@ -214,6 +248,21 @@ function installpgAdmin3(){
 
 function installgedit(){
 	PKG='gedit'
+	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
+
+	if ! dpkg -l $PKG  &> /dev/null ;then
+		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
+		echo -e $verde"Instalando $PKG"$rescolor
+		sudo apt-get install $PKG -y 
+		echo -e $verde"HECHO..."$rescolor	
+	else
+		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
+	fi
+	sleep 0.1
+}
+
+function installHeroku(){
+	PKG='heroku'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 
 	if ! dpkg -l $PKG  &> /dev/null ;then

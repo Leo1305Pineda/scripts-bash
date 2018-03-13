@@ -10,7 +10,8 @@
     "deploy-tooldev": "npm run build-tooldev && bash gitmanager/git-manager.sh start",
     "test-sascha": "npm run build-sascha && run-sascha init",
     "build-sascha": "bash build/build-sascha.sh",
-    "reset-sascha": "sudo rm /bin/run-sascha && sudo rm -R /usr/share/sascha",
+    "reset-sascha": "sudo rm /bin/sascha && sudo rm -R /usr/share/sascha",
+    "resetest-sascha": "sudo rm /bin/run-sascha && sudo rm -R /usr/share/sascha",
     "deploy-sascha": "npm run build-sascha && bash gitmanager/git-manager.sh start"
   },
   "repository": {
@@ -27,5 +28,13 @@
   "bugs": {
     "url": "https://github.com/Leo1305Pineda/scripts-bash/issues"
   },
-  "homepage": "https://github.com/Leo1305Pineda/scripts-bash#readme"
+  "homepage": "https://github.com/Leo1305Pineda/scripts-bash#readme",
+  "dependencies": {
+    "install": "^0.10.4",
+    "javascript-to-typescript": "^1.0.2",
+    "npm": "^5.7.1"
+  },
+  "devDependencies": {
+    "typings": "^2.1.1"
+  }
 }
