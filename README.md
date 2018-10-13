@@ -7,30 +7,25 @@ ToolDev es un script para la instalacion de herramienta de desarrollo como
 	NodeJs
 	PostgreSQL
 	pgAdmin3
+	Laravel
 	WebStorm
 	SublimeText
 	VisualStudioCode
 
 instalar el script tooldev en tu computadora con:
 
-~ $ sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-tooldev -o /bin/abee && sudo chmod a+x /bin/abee && abee --help
+~ $ sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-tooldev -o /bin/tooldev && sudo chmod a+x /bin/tooldev && tooldev --help
 
-install el script sascha en tu computadora con:
-
-~ $ sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-sascha -o /bin/sascha && sudo chmod a+x /bin/sascha 
-
-Para Contribuir en el desarrollo de script-bash con
+Para Contribuir en el desarrollo de script-bash con:
 
 ~ $ git clone http://github.com/Leo1305Pineda/scripts-bash.git
 ~ $ cd scripts-bash
 
-Construir el script tooldev con
+Construir script con:
 ~ $ npm run build-tooldev
-~ $ npm run build-sascha
 
 Testear el script con 
 ~ $ npm run test-tooldev
-~ $ npm run test-sascha
 
 Deploy a Git con
 

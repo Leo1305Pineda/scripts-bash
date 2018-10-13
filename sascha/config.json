@@ -1,0 +1,16 @@
+{
+	"urlBaseGit":"https://github.com/",
+	"repoPadre":"SaschaNutric",
+	"repo":"SaschaNutric",
+	"workspace":"/home/leo/git/sascha",
+	"userEmail":"leo1305pineda@gmail.com",
+	"projects":[{
+		"name":"api-sascha"
+	},{
+		"name":"app-sascha-web"
+	},{
+		"name":"app-sascha-web-desktop"
+	},{
+		"name":"app-sascha-movil"
+	}]
+}

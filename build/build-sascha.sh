@@ -10,7 +10,7 @@ amarillo="\033[1;33m"
 azul="\033[1;34m"
 rescolor="\e[0m"
 
-delay=1
+delay=0.5
 
 function config(){
 
