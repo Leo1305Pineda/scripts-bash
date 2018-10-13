@@ -324,6 +324,16 @@ function installComposer(){
 		echo -e $verde"Instalando $PKG"$rescolor
 		sudo apt-get install $PKG -y 
 		echo -e $verde"HECHO..."$rescolor	
+		if [ $COMPOSER_HOME ]; then 
+			echo "COMPOSER_HOME="$COMPOSER_HOME
+		else
+			sudo chmod 777 '/etc/environment'
+			echo -e $azul"configurando variables entorno COMPOSER_HOME"$rescolor
+			echo "$( cat '/etc/environment' | sed "1i export COMPOSER_HOME=$(echo $HOME)/.composer\nexport PATH=$(echo '$COMPOSER_HOME')/vendor/bin:$(echo '$PATH')\n" )">'/etc/environment'
+			echo -e $verde"HECHO..."$rescolor	
+			echo "COMPOSER_HOME="$COMPOSER_HOME
+			source $HOME'/.bashrc'
+		fi
 	else
 		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
 	fi
@@ -338,7 +348,7 @@ function installLaravel(){
 	else
 		sudo chmod 777 '/etc/environment'
 		echo -e $azul"configurando variables entorno COMPOSER_HOME"$rescolor
-		echo "$( cat '/etc/environment' | sed "1i export COMPOSER_HOME=$(echo $HOME)/.composer/vendor\nexport PATH=$(echo '$COMPOSER_HOME')/bin:$(echo '$PATH')\n" )">'/etc/environment'
+		echo "$( cat '/etc/environment' | sed "1i export COMPOSER_HOME=$(echo $HOME)/.composer\nexport PATH=$(echo '$COMPOSER_HOME')/vendor/bin:$(echo '$PATH')\n" )">'/etc/environment'
 		echo -e $verde"HECHO..."$rescolor	
 		source $HOME'/.bashrc'
 	fi
@@ -382,11 +392,16 @@ function installLaravel(){
 	fi
 }
 
+
 function yesLaravel(){
 	echo -e $verde"HECHO..."$rescolor
 	echo -e $verde"Ya puedes crear tu primer projecto laravel con: "$rescolor 
 	echo
-	echo -e $azul" composer create-project --prefer-dist laravel/laravel blog \"5.5.*\""$rescolor
+	echo -e $azul"composer create-project --prefer-dist laravel/laravel blog \"5.5.*\""$rescolor
+	echo
+	echo "O Usear"
+	echo
+	echo "laravel new tu_projecto"
 	echo
 	echo "cd tu_projecto"
 	echo "compose install"
