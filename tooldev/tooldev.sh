@@ -410,7 +410,15 @@ function yesLaravel(){
 	echo "cd tu_projecto"
 	echo "compose install"
 	echo "npm install"
-	echo "Iniciar el servidor con php artisan server"
+	echo
+	echo -e "Iniciar el servidor con: "$azul"php artisan serve"
+	echo
+	echo -e $verde"###########AVISO##########"$rescolor
+	echo "Luego de crear tu proyecto revisa la version de php que requiere"
+	echo "Mira el archivo composer.json y en \"require\": {
+        \"php\": \"^7.1.3\"} puedes ver la version que require tu proyecto"
+	echo -e "Con el comando: "$azul"php --version"$rescolor"Ves la version que tienes instalada"
+	echo -e "Puedes cambiar la version con el comando: "$azul"tooldev install php && tooldev install composer"$rescolor
 	echo
 	echo -e "laravel"$verde" Esta Instalado?................SI"$rescolor""
 }
@@ -591,7 +599,10 @@ function installApache(){
 function installPhp(){
 	installApache
 
-	PKG='php7.0'
+	echo -n 'Ingrese la version a instalar ejemplo 7.0 or 7.1.3 ->'
+	read VERSION
+
+	PKG='php'$VERSION
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 
 	if ! dpkg -l $PKG  &> /dev/null ;then
@@ -603,7 +614,7 @@ function installPhp(){
 		sudo apt-get install $PKG -y 
 		echo -e $verde"HECHO..."$rescolor	
 
-		PKG='php7.0-mcrypt'
+		PKG='php'$VERSION'-mcrypt'
 		echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 
 	else
@@ -619,7 +630,7 @@ function installPhp(){
 		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
 	fi
 
-	PKG='php7.0-mysql'
+	PKG='php'$VERSION'-mysql'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 	if ! dpkg -l $PKG  &> /dev/null ;then
 		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
@@ -630,7 +641,7 @@ function installPhp(){
 		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
 	fi
 
-	PKG='php7.0-mbstring'
+	PKG='php'$VERSION'-mbstring'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 	if ! dpkg -l $PKG  &> /dev/null ;then
 		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
@@ -648,7 +659,7 @@ function installPhp(){
 		echo -e $verde"Instalando $PKG"$rescolor
 		sudo apt-get install $PKG -y 
 		echo -e $verde"HECHO..."$rescolor
-		echo "$( cat '/etc/php/7.0/apache2/php.ini' | sed "862i extension=msql.so \n" )">'/etc/php/7.0/apache2/php.ini'
+		echo "$( cat '/etc/php/'$VERSION'/apache2/php.ini' | sed "862i extension=msql.so \n" )">'/etc/php/'$VERSION'/apache2/php.ini'
 		echo "$( cat '/etc/apache2/apache2.conf' | sed "220i Include /etc/phpmyadmin/apache.conf \n" )">'/etc/apache2/apache2.conf'
 		apacheRestart
 	else
