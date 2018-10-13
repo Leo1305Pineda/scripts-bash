@@ -121,13 +121,14 @@ while true; do
 
 function update(){
 	echo -e $verde"Actualizando el Script "$NAME_SCRIPT$rescolor
-	if [ -f /bin/run-$NAME_SCRIPT ]; then
-		sudo rm /bin/run-$NAME_SCRIPT
+	sudo echo
+	if [ -f /bin/$NAME_SCRIPT ]; then
+		sudo rm /bin/$NAME_SCRIPT
 	fi
 	if [ -d /usr/share/$NAME_SCRIPT ]; then
 		sudo rm -R /usr/share/$NAME_SCRIPT
 	fi
-	sudo curl -sL https://raw.githubusercontent.com/SaschaNutric/scripts-bash/master/dist/run-sascha -o /bin/sascha 
+	sudo curl -sL https://raw.githubusercontent.com/Leo1305Pineda/scripts-bash/master/dist/run-$NAME_SCRIPT -o /bin/$NAME_SCRIPT 
 	sudo chmod a+x /bin/$NAME_SCRIPT 
 	sudo $NAME_SCRIPT --help
 	sleep 1
