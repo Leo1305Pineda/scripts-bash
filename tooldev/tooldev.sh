@@ -356,7 +356,7 @@ function installLaravel(){
 		source $HOME'/.bashrc'
 	fi
 
-	if ! [ -f $COMPOSER_HOME'/bin/laravel' ]; then
+	if ! [ -f $COMPOSER_HOME'/vendor/bin/laravel' ]; then
 		echo -e $verde"composer global require laravel/installer=~1.1"$rescolor
 		sudo composer global require 'laravel/installer=~1.1'
 		echo -e $verde"HECHO..."$rescolor	
@@ -402,7 +402,7 @@ function yesLaravel(){
 	echo
 	echo -e $azul"composer create-project --prefer-dist laravel/laravel blog \"5.5.*\""$rescolor
 	echo
-	echo "O Usear"
+	echo -e $amarillo"O bien puede usar"$rescolor
 	echo
 	echo "laravel new tu_projecto"
 	echo
