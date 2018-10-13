@@ -168,7 +168,10 @@ function help(){
 	echo -e $amarillo$NAME_SCRIPT" apache "$rescolor"[ opcion ]"$rescolor
 	echo -e $magenta"   opcion:"$rescolor
 	echo -e "	|	restart 		* Reiniciar Servidor Apache"$rescolor
-	
+	echo
+	echo -e $verde"Repositorio Github: "$azul"https://github.com/Leo1305Pineda/scripts-bash"$rescolor
+	echo -e $verde"Desarrollado por:   "$azul"LEONARDO PINEDA"$rescolor
+	echo
 }
 
 function config(){
