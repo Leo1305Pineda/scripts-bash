@@ -4,6 +4,7 @@
 #                                                 #
 	AUTOR='LEONARDO PINEDA'
 	DEBUT=0 #  0-Desarrollo; 1-Distribucion
+	VERSION='0.0.1'
 #                                                 #
 ###################################################
 
@@ -78,6 +79,10 @@ while true; do
 			break;;
 			"install msql" ) installMsql
 			break;;
+			"install mongo" ) installMongo
+			break;;
+			"open mongo") openMongo
+			break;;
 			"install php" ) installPhp
 			break;;
 			"install jdk" ) installJdk
@@ -136,6 +141,12 @@ function update(){
 	echo -e $verde"Ejecutar el script con: "$azul$NAME_SCRIPT$rescolor
 }
 
+function status(){
+	if [ -f /bin/$NAME_SCRIPT ]; then
+		echo "installed"
+	fi
+}
+
 function help(){
 	echo "ejecutar el script "$NAME_SCRIPT" con argumento"
 	echo -e $amarillo$NAME_SCRIPT $rescolor" [ opcion ]"$rescolor
@@ -143,6 +154,7 @@ function help(){
 	echo -e "	|	--help 			* Ayuda de "$NAME_SCRIPT$rescolor
 	echo -e "	|	install 		* Instalacion de toda las herranientas"$rescolor
 	echo -e "	|	update 			* Actualiza el script"$NAME_SCRIPT$rescolor
+	echo -e "	|	status 			* Status del script"$NAME_SCRIPT$rescolor
 	echo -e $amarillo$NAME_SCRIPT" install "$rescolor"[ opcion ]"$rescolor
 	echo -e $magenta"   opcion:"$rescolor
 	echo -e "	|	gedit 			* Herranienta Gedit"$rescolor
@@ -152,6 +164,7 @@ function help(){
 	echo -e "	|	heroku 			* Herranienta Heroku"$rescolor
 	echo -e "	|	apache 			* Herranienta Apache 2"$rescolor
 	echo -e "	|	mysql 			* Herranienta MYSQL"$rescolor
+	echo -e "	|	mongo 			* Herranienta MongoDB"$rescolor
 	echo -e "	|	php 			* Herranienta Php5"$rescolor
 	echo -e "	|	wordpress		* Herranienta Wordpress"$rescolor
 	echo -e "	|	composer		* Herranienta Composer"$rescolor
@@ -163,6 +176,9 @@ function help(){
 	echo -e "	|	webstorm 		* Herranienta WebStorm"$rescolor
 	echo -e "	|	visual-studio-code 	* Herranienta VisualStudioCode"$rescolor
 	echo -e "	|	sublime-text-installer 	* Herranienta SublimeText"$rescolor
+	echo -e $amarillo$NAME_SCRIPT" open "$rescolor"[ opcion ]"$rescolor
+	echo -e $magenta"   opcion:"$rescolor
+	echo -e "	|	mongo 			* Herranienta MongoDB"$rescolor
 	echo -e $amarillo$NAME_SCRIPT" config "$rescolor"[ opcion ]"$rescolor
 	echo -e $magenta"   opcion:"$rescolor
 	echo -e "	|	variables 		* Variables de Entorno"$rescolor
@@ -176,7 +192,6 @@ function help(){
 }
 
 function config(){
-
 	if [ $DEBUT = 1 ] ; then
 		echo "Modo 1-Distribucion"
 	fi
@@ -453,8 +468,63 @@ function installHeroku(){
 	sleep 0.1
 }
 
+function installMongo(){
+	PKG='mongodb-org'
+	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
+
+	if ! dpkg -l $PKG  &> /dev/null ;then
+		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
+		echo -e $verde"Instalando $PKG"$rescolor
+		sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+		echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+		updateSystem
+		sudo apt-get install $PKG -y 
+		sudo mkdir -p /data/db/
+		sudo chmod -R 775 /data/
+		sudo touch /etc/systemd/system/mongodb.service
+		sudo echo '[Unit]
+Description=High-performance, schema-free document-oriented database
+After=network.target
+
+[Service]
+User=mongodb
+ExecStart=/usr/bin/mongod --quiet --config /etc/mongod.conf
+
+[Install]
+WantedBy=multi-user.target'>'/etc/systemd/system/mongodb.service'
+		sudo systemctl start mongodb
+		sudo systemctl status mongodb
+		openMongo		
+		echo -e $verde"HECHO..."$rescolor	
+	else
+		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
+	fi
+	sleep 0.1
+}
+
+function openMongo(){
+	installTerminal
+	sudo mongod --repair && sudo mongod
+	gnome-terminal -x sh -c "mongo; bash"
+}
+
 function installGit(){
 	PKG='git'
+	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
+
+	if ! dpkg -l $PKG  &> /dev/null ;then
+		echo -e "\e[1;31m$PKG No Esta Instalado"$rescolor""
+		echo -e $verde"Instalando $PKG"$rescolor
+		sudo apt-get install $PKG -y 
+		echo -e $verde"HECHO..."$rescolor	
+	else
+		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
+	fi
+	sleep 0.1
+}
+
+function installTerminal(){
+	PKG='gnome-terminal'
 	echo -e $azul"Tool"$gris"-"$amarillo"dev"$rescolor": "$PKG
 
 	if ! dpkg -l $PKG  &> /dev/null ;then
@@ -891,27 +961,27 @@ function configTomcat(){
 	echo
 	echo "Parada: "
 	while true; do
-						echo "Desea detener el servidor"
-						echo "                                   "
-						echo -e "      "$verde"1)"$rescolor" SI "
-						echo -e "      "$verde"2)"$rescolor" NO "
-						echo "                                       "
-						echo -n "      #> "
-						read yn
-						echo ""
-						case $yn in
-							1 ) 
-								echo -e "Ejecutando"$rojo" sudo $gris$DIR_TOMCAT/bin/shutdown.sh"$rescolor
-								sudo $DIR_TOMCAT/bin/shutdown.sh
-								break ;;
-							2 ) 
-								echo -e $verde"CONTINUANDO..."$rescolor	
-								echo -e "Parada de servidor con: "$rojo" sudo $gris$DIR_TOMCAT/bin/shutdown.sh"$rescolor
-								$NAME_SCRIPT --help	
-								break ;;  
-							* ) echo "Opción desconocida. Elige de nuevo";
-	  					esac
-					done
+		echo "Desea detener el servidor"
+		echo "                                   "
+		echo -e "      "$verde"1)"$rescolor" SI "
+		echo -e "      "$verde"2)"$rescolor" NO "
+		echo "                                       "
+		echo -n "      #> "
+		read yn
+		echo ""
+		case $yn in
+			1 ) 
+				echo -e "Ejecutando"$rojo" sudo $gris$DIR_TOMCAT/bin/shutdown.sh"$rescolor
+				sudo $DIR_TOMCAT/bin/shutdown.sh
+				break ;;
+			2 ) 
+				echo -e $verde"CONTINUANDO..."$rescolor	
+				echo -e "Parada de servidor con: "$rojo" sudo $gris$DIR_TOMCAT/bin/shutdown.sh"$rescolor
+				$NAME_SCRIPT --help	
+				break ;;  
+			* ) echo "Opción desconocida. Elige de nuevo";
+	  	esac
+	done
 }
 
 function descomprimirTomcat(){
@@ -1024,4 +1094,10 @@ function descomprimirVisualStudioCode(){
 	bash -ic "bash $DIR_LIB/$RES$BIN"
 }
 
-main "$@"
+if [[ "$@" = "status" ]]; then
+	status
+else
+	main "$@"
+fi
+
+
