@@ -77,7 +77,7 @@ while true; do
 			break;;
 			"install apache" ) installApache
 			break;;
-			"install msql" ) installMsql
+			"install mysql" ) installMsql
 			break;;
 			"install mongo" ) installMongo
 			break;;
@@ -102,6 +102,8 @@ while true; do
 			"install postgresql" ) installPostgreSQL
 			break;;
 			"install pgadmin3" ) installpgAdmin3
+			break;;
+			"install postman" ) installPostman
 			break;;
 			"install webstorm" ) installWebStorm
 			break;;
@@ -317,6 +319,11 @@ function installpgAdmin3(){
 		echo -e $PKG$verde" Esta Instalado?................SI"$rescolor""
 	fi
 	sleep 0.1
+}
+
+function installPostman(){
+	sudo chmod 777 $PWD/lib/install_postman.sh
+	bash $PWD/lib/install_postman.sh
 }
 
 function installgedit(){
