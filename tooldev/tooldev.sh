@@ -4,7 +4,7 @@
 #                                                 #
 	AUTOR='LEONARDO PINEDA'
 	DEBUT=0 #  0-Desarrollo; 1-Distribucion
-	VERSION='0.0.1'
+	VERSION='0.0.2'
 #                                                 #
 ###################################################
 
@@ -175,6 +175,7 @@ function help(){
 	echo -e "	|	ionic 			* Herranienta Ionic"$rescolor
 	echo -e "	|	pgadmin3 		* Herranienta Pgadmin3"$rescolor
 	echo -e "	|	postgresql 		* Herranienta PostgreSql"$rescolor
+	echo -e "	|	postman 		* Herranienta Postman"$rescolor
 	echo -e "	|	webstorm 		* Herranienta WebStorm"$rescolor
 	echo -e "	|	visual-studio-code 	* Herranienta VisualStudioCode"$rescolor
 	echo -e "	|	sublime-text-installer 	* Herranienta SublimeText"$rescolor
